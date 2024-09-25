@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raspberry Pi Webcam Control</title>
+  </head>
+  <body>
+    <h1>Webcam Stream with Servo Control</h1>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480" />
+
+    <div>
+      <button onclick="moveServo('left')">Move Left</button>
+      <button onclick="moveServo('right')">Move Right</button>
+    </div>
+
+    <script>
+      function moveServo(direction) {
+        fetch("/move/" + direction)
+          .then((response) => response.text())
+          .then((data) => console.log(data));
+      }
+    </script>
+  </body>
+</html>
